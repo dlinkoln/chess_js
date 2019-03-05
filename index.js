@@ -1,4 +1,4 @@
-
+import Queen from "./figs/queen.js"
 function initBoard() {
   var container=document.getElementById("app")
   var wSize = Math.min(window.innerHeight, window.innerWidth)/16
@@ -28,6 +28,14 @@ function initBoard() {
 
 }
 
-window.onload = initBoard;
+function play() {
+  var queen_w = new Queen("white")
+  queen_w.validate();
+}
+
+window.onload = () => {
+  initBoard()
+  play()
+};
 
 
