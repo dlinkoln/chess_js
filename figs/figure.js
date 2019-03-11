@@ -6,10 +6,12 @@ export default function Figure(colour, name, fmt="svg") {
   }
   this.draw = (el) => {
     var path = fmt+"/"+name+"_"+colour+"."+fmt
-    var r_w, r_h
-    r_w = el.offsetWidth
-    r_h = el.offsetHeight
-    el.innerHTML = '<img src="'+path+'" alt="" width="'+r_w+'" height="'+r_h+'">'
+    var r_w, r_h, r_w_e, r_h_e
+    r_w = el.offsetWidth * 0.75
+    r_w_e = (el.offsetWidth - r_w)/2;
+    r_h = el.offsetHeight * 0.75
+    r_h_e = (el.offsetHeight - r_h)/2;
+    el.innerHTML = '<img src="'+path+'" alt="" style="width: '+r_w+'px;height: '+r_h+'px;margin: '+r_h_e+'px '+r_w_e+'px;cursor:pointer;">'
   }
 
 }

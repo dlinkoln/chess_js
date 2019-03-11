@@ -3,16 +3,21 @@ import Figure from "./figs/figure.js"
 function makeBoard() {
   var container=document.getElementById("app")
 
+  var wSize = Math.min(window.innerHeight, window.innerWidth)
+  container.style.width = wSize/2 + "px"
+  container.style.height = wSize/2 + "px"
 
-  var wSize = Math.min(window.innerHeight, window.innerWidth)/16
+
+  var rects=[[]];
+
   var position = [[new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")], 
     [new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")], 
     [], 
     [], 
     [], 
     [], 
-    [new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")], 
-    [new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")]];
+    [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")], 
+    [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")]];
 
   console.log("Window size", wSize)
   console.log("i elem in Array", position[0][1])
@@ -22,18 +27,18 @@ function makeBoard() {
     el.style.width = size;
     el.style.height = size;
     el.style.background = colour;
-    el.style.display = "inline-block"
+    el.style.float = "left"
+    rects.push(el)
     return el
   }
 
   for (var i=0; i<8;i++) {
     for (var j=0; j<8; j++) {
-      container.appendChild(createRect(wSize+"px", ((i+j)%2==0)?"#a0a0a0":"#eee"))
+      container.appendChild(createRect(wSize/16+"px", ((i+j)%2==0)?"#a0a0a0":"#eee"))
     }
-    container.appendChild(document.createElement("br"))
   }
 
-  var rects = container.querySelectorAll("div");
+  //rects = container.querySelectorAll("div");
 
   console.log(rects)
   setFigs(position)
@@ -45,7 +50,8 @@ function makeBoard() {
 
     for (var i=0; i<8;i++) {
       for (var j=0; j<8; j++) {
-        if (arr[i][j]!=undefined) arr[i][j].draw(rects[i+j])
+        debugger;
+        if (arr[i][j]!=undefined) arr[i][j].draw(rects[8*i+j+1])
       }
     }
   }
