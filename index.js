@@ -1,62 +1,87 @@
-import Figure from "./figs/figure.js"
+// import Figure from "./figs/figure.js"
 
 function makeBoard() {
-    var container = document.getElementById("app")
+    let container = document.getElementById("app");
+    let wSize = Math.min(window.innerHeight, window.innerWidth);
 
-    var wSize = Math.min(window.innerHeight, window.innerWidth)
-    container.style.width = wSize / 2 + "px"
-    container.style.height = wSize / 2 + "px"
+    // if(window.inner){
 
+    // }
+    console.log(wSize);
+    container.style.cssText =
+        `
+        width: ${wSize / 1.5}px;
+        height: ${wSize / 1.5}px;
+        display:flex;
+        justify-self: center;
+        justify-content:center;
+        margin-top: 10%;
+        flex-wrap:wrap;
+    `
+    let rects = [[]];
 
-    var rects = [[]];
+    // var position = [[new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")],
+    // [new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")],
+    // [],
+    // [],
+    // [],
+    // [],
+    // [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")],
+    // [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")]];
+    // console.log("i elem in Array", position[0][1])
 
-    var position = [[new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")],
-    [new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook"), new Figure("b", "rook")],
-    [],
-    [],
-    [],
-    [],
-    [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")],
-    [new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook"), new Figure("w", "rook")]];
-
-    console.log("Window size", wSize)
-    console.log("i elem in Array", position[0][1])
 
     function createRect(size = "50px", colour = "black") {
-        var el = document.createElement("div")
-        el.style.width = size;
-        el.style.height = size;
-        el.style.background = colour;
-        el.style.float = "left"
-        rects.push(el)
-        return el
+        var el = document.createElement("div");
+        el.style.cssText = `
+            width: ${size};
+            height: ${size};
+            background: ${colour};
+        `
+
+        rects.push(el);
+        return el;
     }
-
-    for (var i = 0; i < 8; i++) {
-        for (var j = 0; j < 8; j++) {
-            container.appendChild(createRect(wSize / 16 + "px", ((i + j) % 2 == 0) ? "#a0a0a0" : "#eee"))
-        }
-    }
-
-    //rects = container.querySelectorAll("div");
-
-    console.log(rects)
-    setFigs(position)
-
-    function setFigs(arr) {
-        var fig;
-
-        console.log(arr)
-
-        for (var i = 0; i < 8; i++) {
-            for (var j = 0; j < 8; j++) {
-                debugger;
-                if (arr[i][j] != undefined) arr[i][j].draw(rects[8 * i + j + 1])
+    (function () {
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                container.appendChild(createRect(Math.floor(wSize / 12) + "px", ((i + j) % 2 == 0) ? "#a0a0a0" : "#eee"));
             }
         }
-    }
+        rects = container.querySelectorAll("div");
+    }());
 
+    // (function () {
+    //     let numFlag = 0;
+    //     let alpFlag = 0;
+    //     for (let i = 0; i < rects.length; i++) {
+    //         console.log(alpFlag)
+    //         if (alpFlag === 7) {
+    //             alpFlag = 0;
+    //             console.log(alpFlag);
+    //         }
+    //         if (i % 7 === 0) {
+    //             numFlag++;
+    //             console.log(numFlag);
+    //         }
+    //     }
+    // }(rects))
 
+    // setFigs(position)
+
+    // function setFigs(arr) {
+    //     var fig;
+
+    //     console.log(arr)
+
+    //     for (let i = 0; i < 8; i++) {
+    //         for (let j = 0; j < 8; j++) {
+    //             if (arr[i][j] != undefined) {
+    //                 arr[i][j].draw(rects[8 * i + j + 1])
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 //function play() {
@@ -65,6 +90,6 @@ function makeBoard() {
 //}
 window.onload = () => {
     makeBoard()
-    //play()
+    // play();
 };
 
